@@ -41,8 +41,12 @@ public class CapacitorGoogleMaps: CAPPlugin, GMSMapViewDelegate, GMSPanoramaView
                 "longitude": call.getDouble("longitude") ?? 0.0,
                 "zoom": call.getDouble("zoom") ?? (self.DEFAULT_ZOOM)
             ]
-            self.bridge.viewController.view.addSubview(self.mapViewController.view)
+            self.webView.addSubview(self.mapViewController.view)
             self.mapViewController.GMapView.delegate = self
+            self.webView.sendSubviewToBack(self.mapViewController.view)
+            self.webView.isOpaque = false
+            self.webView.backgroundColor = UIColor.clear
+            self.webView.scrollView.backgroundColor = UIColor.clear
         }
         call.success([
             "created": true
